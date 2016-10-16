@@ -1,34 +1,33 @@
-require_relative "./currencies"
+require_relative "./currencies"  # => true
+require 'set'                    # => true
 
 class Currency_converter
-
-  def initialize (first = 0, second = 0)
-    @first = first
-    @second = second
+  def initialize(rates)
+    @conversion_rates = rates
   end
 
-  def add_amount
-    @first.amount! + @second.amount!
+  def keys
+    self.keys
   end
 
-  def compare_amount
-    @first.amount! == @second.amount!
+  def currency_object(country_code1, country_code2)
+    @conversion_rates[country_code1] *  @conversion_rates[country_code2]
   end
 
-  def compare_code
-    @first.code! == @second.code!
-  end
-
-  def total_compare
-    compare_code == true && compare_amount == true ? "The currency amounts and codes match": "The currency amounts and codes do NOT match"
-  end
-
-  def validate_addition
-    if !compare_code
-      "Currency codes don't match therefore they can't add togeather"
+  def currency_object_check(country_code1, country_code2)
+    rates = 0.0
+    if country_code1 != "USD" && country_code2 != "USD"
+      rates = @conversion_rates[country_code1] /  @conversion_rates[country_code2]
+      "#{rates} #{country_code1} to #{country_code2}"
     else
-      "The total amount of the currency is #{add_amount}"
+      rates = @conversion_rates[country_code1] *  @conversion_rates[country_code2]
+
+      "#{rates} #{country_code1} to #{country_code2}"
     end
   end
 
+  # def looping(country code1)
+  #   self.each {|@conversion_rates|}
+  #   puts amount
+  # end
 end
