@@ -1,55 +1,61 @@
-class Currencies
+require_relative "./error"
 
 
-def initialize (amount = nil, code ="")
-  @amount = amount
-  @code = code
-end
+class Currency
 
-def amount!
-  @amount
-end
-
-def code!
-  @code
-end
-
-def multiply(number)
-  "#{@amount * number} in #{@code}"
-end
+  attr_accessor :amount, :code
 
 
+  def initialize (amount = nil, code = "")
+    @amount = amount
+    @code = code
+  end
 
-def compare_amount_and_code(other)
-  return self.amount! == other.amount! && self.code! == other.code!
-end
-
-
-def compare_amount_code(other)
-  return self.code! == other.code!
-end
-
-def add_amount(other)
-  self.amount! + other.amount!
-end
-
-def sub_amount(other)
-  self.amount! - other.amount!
-end
+  # def amount
+  #   @amount
+  # end
+  #
+  # def code
+  #   @code
+  # end
 
 
-def validate_addition(other)
-  raise "DifferentCurrencyCodeError" if !compare_amount_code(other)
-
-  "The total amount of the currency is #{add_amount(other)}"
-end
 
 
-def validate_sub(other)
-  raise "DifferentCurrencyCodeError" if !compare_amount_code(other)
 
-  "The total amount of the currency is #{sub_amount(other)}"
+  def ==(other)
+    return amount == other.amount && code == other.code
+  end
 
-end
+
+  def compare_amount_code(other)
+    return code == other.code
+  end
+
+  def add(other)
+    amount + other.amount
+  end
+
+  def sub(other)
+    amount - other.amount
+  end
+
+
+  def +(other)
+    raise DifferentCurrencyCodeError if !compare_amount_code(other)
+
+    Currency.new(add(other), self.code)
+  end
+
+
+  def -(other)
+    raise DifferentCurrencyCodeError if !compare_amount_code(other)
+
+    Currency.new(sub(other), code)
+  end
+
+  def *(number)
+    Currency.new(amount * number, code)
+  end
 
 end
