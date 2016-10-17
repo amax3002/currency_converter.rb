@@ -1,13 +1,13 @@
-require_relative "./currencies"  # => true
-require 'set'                    # => true
+require_relative "./currencies"
+require 'set'
 
 class Currency_converter
   def initialize(rates)
     @conversion_rates = rates
   end
 
-  def keys
-    self.keys
+  def keyss
+    @conversion_rates.keys
   end
 
   def currency_object(country_code1, country_code2)
@@ -26,8 +26,20 @@ class Currency_converter
     end
   end
 
-  # def looping(country code1)
-  #   self.each {|@conversion_rates|}
-  #   puts amount
-  # end
+  def get_em (country_code1)
+    @conversion_rates.each do |key, array|
+      if country_code1 != "USD"
+        if key !=  country_code1
+        puts "1 #{country_code1} is #{array / @conversion_rates[country_code1]} in #{key}"
+        end
+      else
+        if key !=  country_code1
+        puts key
+        puts "1 #{country_code1} is #{array * @conversion_rates[country_code1]} in #{key}"
+        end
+
+      end
+    end
+  end
+
 end
