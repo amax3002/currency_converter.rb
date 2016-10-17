@@ -6,7 +6,7 @@ def initialize (amount = nil, code ="")
   @code = code
 end
 
-def amount! 
+def amount!
   @amount
 end
 
