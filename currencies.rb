@@ -1,4 +1,4 @@
-class Currencies
+class Currency
 
 
 def initialize (amount = nil, code ="")

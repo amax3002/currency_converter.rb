@@ -1,7 +1,7 @@
-require_relative "./currencies"
+require_relative "./currency"
 require 'set'
 
-class Currency_converter
+class CurrencyConverter
   def initialize(rates)
     @conversion_rates = rates
   end
