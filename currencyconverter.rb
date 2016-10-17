@@ -3,12 +3,13 @@ require 'set'
 require_relative "./error"
 
 class CurrencyConverter
-
-  attr_accessor :conversion_rates
+attr_accessor :conversion_rates
 
   def initialize(rates)
     @conversion_rates = rates
   end
+
+
 
   def converter(object, code)
     raise UnknownCurrencyCodeError unless conversion_rates.include?(object.code) && conversion_rates.include?(code)

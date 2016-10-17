@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 require_relative "./error"
-=======
-class Currency
->>>>>>> 57b438412763d8425812c738456f5726ac480234
 
 
 class Currency
@@ -14,16 +10,6 @@ class Currency
     @amount = amount
     @code = code
   end
-
-  # def amount
-  #   @amount
-  # end
-  #
-  # def code
-  #   @code
-  # end
-
-
 
 
 
@@ -48,7 +34,7 @@ class Currency
   def +(other)
     raise DifferentCurrencyCodeError if !compare_amount_code(other)
 
-    Currency.new(add(other), self.code)
+    Currency.new(add(other), code)
   end
 
 
